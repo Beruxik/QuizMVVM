@@ -1,0 +1,50 @@
+{
+    "title": "Nazwa quizu",
+    "questions":
+    [
+        {
+            "content": "Treść pytania 1",
+            "answers":
+            [
+                {
+                    "content": "Odpowiedź 1",
+                    "isCorrect": true
+                },
+                {
+                    "content": "Odpowiedź 2",
+                    "isCorrect": false
+                },
+                {
+                    "content": "Odpowiedź 3",
+                    "isCorrect": false
+                },
+                {
+                    "content": "Odpowiedź 4",
+                    "isCorrect": true
+                }
+            ]
+        },
+        {
+            "content": "Treść pytania 2",
+            "answers":
+            [
+                {
+                    "content": "Odpowiedź 1",
+                    "isCorrect": false
+                },
+                {
+                    "content": "Odpowiedź 2",
+                    "isCorrect": false
+                },
+                {
+                    "content": "Odpowiedź 3",
+                    "isCorrect": true
+                },
+                {
+                    "content": "Odpowiedź 4",
+                    "isCorrect": false
+                }
+            ]
+        }
+    ]
+}
