@@ -10,7 +10,7 @@ namespace QuizMVVM.Model
 {
     static public class Decode
     {
-        static public void Decoding(string fileName, int n)
+        static public string Decoding(string fileName, int n)
         {
             string fileString = File.ReadAllText(fileName);
             string fileStringDecrypted = "";
@@ -19,8 +19,7 @@ namespace QuizMVVM.Model
                 int charIndex = fileString[i];
                 fileStringDecrypted += Convert.ToChar(charIndex - n);
             }
-            MessageBox.Show(fileStringDecrypted);
-            File.WriteAllText(fileName, fileStringDecrypted);
+            return fileStringDecrypted;
         }
     }
 }
