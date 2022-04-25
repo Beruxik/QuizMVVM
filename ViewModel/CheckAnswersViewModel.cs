@@ -23,6 +23,12 @@ namespace QuizMVVM.ViewModel
         {
             _questionNumber = 0;
             Title = "Check answers " + Title;
+
+            ButtonABackgroundCheckAnswers = Brushes.LightGray;
+            ButtonBBackgroundCheckAnswers = Brushes.LightGray;
+            ButtonCBackgroundCheckAnswers = Brushes.LightGray;
+            ButtonDBackgroundCheckAnswers = Brushes.LightGray;
+
             if (quizClass?.Questions?[_questionNumber]?.Answers?[0]?.IsCorrect == true && Answers[_questionNumber].Contains("A"))
                 ButtonABackgroundCheckAnswers = Brushes.Green;
             else if (quizClass?.Questions?[_questionNumber]?.Answers?[0]?.IsCorrect == true && !Answers[_questionNumber].Contains("A"))

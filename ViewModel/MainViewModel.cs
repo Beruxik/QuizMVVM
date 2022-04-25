@@ -53,18 +53,13 @@ namespace QuizMVVM.ViewModel
             WriteIndented = true
         };
 
-        static string fileName = @"..\..\..\quiz-test.json";
+        static string fileName = @"..\..\..\test.json";
 
-        string fileString = File.ReadAllText(fileName);
-
-        static string jsonString = File.ReadAllText(fileName);
-        protected QuizClass? quizClass = JsonSerializer.Deserialize<QuizClass>(jsonString, options);
+        protected QuizClass? quizClass = JsonSerializer.Deserialize<QuizClass>(Decode.Decoding(fileName, 3), options);
 
 
         public MainViewModel()
         {
-            //Decode.Decoding(fileName, 3);
-
             Title = quizClass?.Title;
             for (int i = 0; i < quizClass?.Questions?.Count; i++)
                 _answers.Add(new List<string>());
