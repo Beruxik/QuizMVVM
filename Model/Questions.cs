@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuizMVVM.Model
 {
-    internal class Questions
+    public class Questions
     {
         [System.Runtime.Serialization.DataMember(Name = "content")]
         public string? Content { get; set; }

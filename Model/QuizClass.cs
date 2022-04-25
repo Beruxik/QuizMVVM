@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace QuizMVVM.Model
 {
-    internal class QuizClass
+    public class QuizClass
     {
         [System.Runtime.Serialization.DataMember(Name = "title")]
         public string? Title { get; set; }

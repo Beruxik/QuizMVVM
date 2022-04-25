@@ -11,23 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace QuizMVVM
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logika interakcji dla klasy CheckAnswers.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CheckAnswers : Window
     {
-        public MainWindow()
+        public CheckAnswers()
         {
             InitializeComponent();
-            MainViewModel viewModel = new MainViewModel();
-            this.DataContext = viewModel;
-            if (viewModel.CloseAction == null)
-                viewModel.CloseAction = new Action(this.Close);
+            DataContext = new CheckAnswersViewModel();
         }
     }
 }

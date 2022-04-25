@@ -24,27 +24,47 @@
                 }
             ]
         },
-        {
-            "content": "Treść pytania 2",
-            "answers":
-            [
-                {
-                    "content": "Odpowiedź 1",
-                    "isCorrect": false
-                },
-                {
-                    "content": "Odpowiedź 2",
-                    "isCorrect": false
-                },
-                {
-                    "content": "Odpowiedź 3",
-                    "isCorrect": true
-                },
-                {
-                    "content": "Odpowiedź 4",
-                    "isCorrect": false
-                }
-            ]
-        }
+      {
+        "content": "Treść pytania 2",
+        "answers": [
+          {
+            "content": "Odpowiedź 1",
+            "isCorrect": false
+          },
+          {
+            "content": "Odpowiedź 2",
+            "isCorrect": false
+          },
+          {
+            "content": "Odpowiedź 3",
+            "isCorrect": true
+          },
+          {
+            "content": "Odpowiedź 4",
+            "isCorrect": false
+          }
+        ]
+      },
+      {
+        "content": "Treść pytania 3",
+        "answers": [
+          {
+            "content": "Odpowiedź 1",
+            "isCorrect": false
+          },
+          {
+            "content": "Odpowiedź 2",
+            "isCorrect": true
+          },
+          {
+            "content": "Odpowiedź 3",
+            "isCorrect": true
+          },
+          {
+            "content": "Odpowiedź 4",
+            "isCorrect": false
+          }
+        ]
+      }
     ]
 }

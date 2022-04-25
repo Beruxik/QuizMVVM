@@ -11,13 +11,14 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace QuizMVVM.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-
+        private string _title;
         // Odpowiedzi
         private string _answerA;
         private string _answerB;
@@ -25,7 +26,18 @@ namespace QuizMVVM.ViewModel
         private string _answerD;
         private string _question;
         private string _score;
-        private int _questionNumber = 0;
+        private int _scoreCount = 0;
+        private Brush _buttonABackground;
+        private Brush _buttonBBackground;
+        private Brush _buttonCBackground;
+        private Brush _buttonDBackground;
+        protected int _questionNumber = 0;
+        private bool _isAnswerAChecked;
+        private bool _isAnswerBChecked;
+        private bool _isAnswerCChecked;
+        private bool _isAnswerDChecked;
+        static protected List<List<string>> _answers = new List<List<string>>();
+        private readonly List<List<string>> _answersCheck = _answers;
 
         private bool _isThisLastQuestion;
 
@@ -42,17 +54,32 @@ namespace QuizMVVM.ViewModel
         };
 
         static string fileName = @"..\..\..\quiz-test.json";
+
+        string fileString = File.ReadAllText(fileName);
+
         static string jsonString = File.ReadAllText(fileName);
-        QuizClass? quizClass = JsonSerializer.Deserialize<QuizClass>(jsonString, options);
+        protected QuizClass? quizClass = JsonSerializer.Deserialize<QuizClass>(jsonString, options);
+
 
         public MainViewModel()
         {
+            //Decode.Decoding(fileName, 3);
+
+            Title = quizClass?.Title;
+            for (int i = 0; i < quizClass?.Questions?.Count; i++)
+                _answers.Add(new List<string>());
+
             // Wyświetlenie odpowiedzi
             Question = quizClass?.Questions?[_questionNumber]?.Content?.ToString();
             AnswerA = quizClass?.Questions?[_questionNumber]?.Answers?[0]?.Content?.ToString();
             AnswerB = quizClass?.Questions?[_questionNumber]?.Answers?[1]?.Content?.ToString();
             AnswerC = quizClass?.Questions?[_questionNumber]?.Answers?[2]?.Content?.ToString();
             AnswerD = quizClass?.Questions?[_questionNumber]?.Answers?[3]?.Content?.ToString();
+
+            ButtonABackground = Brushes.LightGray;
+            ButtonBBackground = Brushes.LightGray;
+            ButtonCBackground = Brushes.LightGray;
+            ButtonDBackground = Brushes.LightGray;
 
             AnswerButtonCommand = new RelayCommand(AnswerButton);
 
@@ -68,7 +95,11 @@ namespace QuizMVVM.ViewModel
             _dispatcherTimer.Start();
         }
 
-        
+        public string Title 
+        { 
+            get { return this._title; } 
+            set { this._title = value; OnPropertyChanged(); } 
+        }
 
         // Timer
         public string TimerText
@@ -83,7 +114,7 @@ namespace QuizMVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        
+
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
@@ -128,62 +159,145 @@ namespace QuizMVVM.ViewModel
             set { _score = value; OnPropertyChanged(); }
         }
 
+        public Brush ButtonABackground
+        {
+            get { return _buttonABackground; }
+            set { _buttonABackground = value; OnPropertyChanged(); }
+        }
+
+        public Brush ButtonBBackground
+        {
+            get { return _buttonBBackground; }
+            set { _buttonBBackground = value; OnPropertyChanged(); }
+        }
+
+        public Brush ButtonCBackground
+        {
+            get { return _buttonCBackground; }
+            set { _buttonCBackground = value; OnPropertyChanged(); }
+        }
+
+        public Brush ButtonDBackground
+        {
+            get { return _buttonDBackground; }
+            set { _buttonDBackground = value; OnPropertyChanged(); }
+        }
+
         public ICommand AnswerButtonCommand { get; set; }
 
         private void AnswerButton(object obj)
         {
-            if(obj as string == "A")
+            // Zmiana koloru przycisku przy jego kliknięciu
+            if (obj as string == "A")
             {
-                if (quizClass?.Questions?[_questionNumber]?.Answers?[0]?.IsCorrect == true)
+                if (ButtonABackground == Brushes.LightGray)
                 {
-                    int wynik = Int32.Parse(Regex.Match(Score.ToString(), @"\d+").Value);
-                    wynik++;
-                    Score = $"Wynik: {wynik.ToString()}";
+                    ButtonABackground = Brushes.Cyan;
+                    _isAnswerAChecked = true;
+                }
+                else
+                {
+                    ButtonABackground = Brushes.LightGray;
+                    _isAnswerAChecked = false;
                 }
             }
             if (obj as string == "B")
             {
-                if (quizClass?.Questions?[_questionNumber]?.Answers?[1]?.IsCorrect == true)
+                if (ButtonBBackground == Brushes.LightGray)
                 {
-                    int wynik = Int32.Parse(Regex.Match(Score.ToString(), @"\d+").Value);
-                    wynik++;
-                    Score = $"Wynik: {wynik.ToString()}";
+                    ButtonBBackground = Brushes.Cyan;
+                    _isAnswerBChecked = true;
+                }
+                else
+                {
+                    ButtonBBackground = Brushes.LightGray;
+                    _isAnswerBChecked = false;
                 }
             }
             if (obj as string == "C")
             {
-                if (quizClass?.Questions?[_questionNumber]?.Answers?[2]?.IsCorrect == true)
+                if (ButtonCBackground == Brushes.LightGray)
                 {
-                    int wynik = Int32.Parse(Regex.Match(Score.ToString(), @"\d+").Value);
-                    wynik++;
-                    Score = $"Wynik: {wynik.ToString()}";
+                    ButtonCBackground = Brushes.Cyan;
+                    _isAnswerCChecked = true;
+                }
+                else
+                {
+                    ButtonCBackground = Brushes.LightGray;
+                    _isAnswerCChecked = false;
                 }
             }
             if (obj as string == "D")
             {
-                if (quizClass?.Questions?[_questionNumber]?.Answers?[3]?.IsCorrect == true)
+                if (ButtonDBackground == Brushes.LightGray)
                 {
-                    int wynik = Int32.Parse(Regex.Match(Score.ToString(), @"\d+").Value);
-                    wynik++;
-                    Score = $"Wynik: {wynik.ToString()}";
+                    ButtonDBackground = Brushes.Cyan;
+                    _isAnswerDChecked = true;
                 }
-            } 
+                else
+                {
+                    ButtonDBackground = Brushes.LightGray;
+                    _isAnswerDChecked = false;
+                }
+            }
         }
 
         public ICommand NextQuestionCommand { get; set; }
 
         private void NextQuestion(object obj)
         {
+            // Sprawdzanie poprawności zaznaczonych odpowiedzi
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[0]?.IsCorrect == true && _isAnswerAChecked == true) // A
+                _scoreCount++;
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[0]?.IsCorrect == false && _isAnswerAChecked == true)
+                _scoreCount--;
+
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[1]?.IsCorrect == true && _isAnswerBChecked == true) // B
+                _scoreCount++;
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[1]?.IsCorrect == false && _isAnswerBChecked == true)
+                _scoreCount--;
+
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[2]?.IsCorrect == true && _isAnswerCChecked == true) // C
+                _scoreCount++;
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[2]?.IsCorrect == false && _isAnswerCChecked == true)
+                _scoreCount--;
+
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[3]?.IsCorrect == true && _isAnswerDChecked == true) // D
+                _scoreCount++;
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[3]?.IsCorrect == false && _isAnswerDChecked == true)
+                _scoreCount--;
+
+            Score = $"Wynik: {_scoreCount.ToString()}";
+
+            // Wpisywanie zaznaczonych odpowiedzi do listy
+            if (_isAnswerAChecked == true)
+                _answers[_questionNumber].Add("A");
+            if (_isAnswerBChecked == true)
+                _answers[_questionNumber].Add("B");
+            if (_isAnswerCChecked == true)
+                _answers[_questionNumber].Add("C");
+            if (_isAnswerDChecked == true)
+                _answers[_questionNumber].Add("D");
+
+            // Pokazywanie kolejnych odpowiedzi i ustawianie wartości odpowiedzi
             if (_questionNumber < quizClass?.Questions?.Count - 1)
             {
                 _questionNumber++;
-                if(_questionNumber >= quizClass?.Questions?.Count - 1)
+                if (_questionNumber >= quizClass?.Questions?.Count - 1)
                     _isThisLastQuestion = true;
                 Question = quizClass?.Questions?[_questionNumber]?.Content?.ToString();
                 AnswerA = quizClass?.Questions?[_questionNumber]?.Answers?[0]?.Content?.ToString();
                 AnswerB = quizClass?.Questions?[_questionNumber]?.Answers?[1]?.Content?.ToString();
                 AnswerC = quizClass?.Questions?[_questionNumber]?.Answers?[2]?.Content?.ToString();
                 AnswerD = quizClass?.Questions?[_questionNumber]?.Answers?[3]?.Content?.ToString();
+                _isAnswerAChecked = false;
+                _isAnswerBChecked = false;
+                _isAnswerCChecked = false;
+                _isAnswerDChecked = false;
+                ButtonABackground = Brushes.LightGray;
+                ButtonBBackground = Brushes.LightGray;
+                ButtonCBackground = Brushes.LightGray;
+                ButtonDBackground = Brushes.LightGray;
             }
         }
 
@@ -193,14 +307,59 @@ namespace QuizMVVM.ViewModel
 
         private void End(object obj)
         {
+            // Sprawdzanie poprawności zaznaczonych odpowiedzi
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[0]?.IsCorrect == true && _isAnswerAChecked == true) // A
+                _scoreCount++;
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[0]?.IsCorrect == false && _isAnswerAChecked == true)
+                _scoreCount--;
+
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[1]?.IsCorrect == true && _isAnswerBChecked == true) // B
+                _scoreCount++;
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[1]?.IsCorrect == false && _isAnswerBChecked == true)
+                _scoreCount--;
+
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[2]?.IsCorrect == true && _isAnswerCChecked == true) // C
+                _scoreCount++;
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[2]?.IsCorrect == false && _isAnswerCChecked == true)
+                _scoreCount--;
+
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[3]?.IsCorrect == true && _isAnswerDChecked == true) // D
+                _scoreCount++;
+            if (quizClass?.Questions?[_questionNumber]?.Answers?[3]?.IsCorrect == false && _isAnswerDChecked == true)
+                _scoreCount--;
+
+            Score = $"Wynik: {_scoreCount.ToString()}";
+
+            // Wpisywanie zaznaczonych odpowiedzi do listy
+            if (_isAnswerAChecked == true)
+                _answers[_questionNumber].Add("A");
+            if (_isAnswerBChecked == true)
+                _answers[_questionNumber].Add("B");
+            if (_isAnswerCChecked == true)
+                _answers[_questionNumber].Add("C");
+            if (_isAnswerDChecked == true)
+                _answers[_questionNumber].Add("D");
+
+            // Zatrzymanie timera i wyświetlenie wyniku
             _dispatcherTimer.Stop();
-            MessageBox.Show($"Twój wynik: {Regex.Match(Score.ToString(), @"\d+").Value}\n" +
+            MessageBox.Show($"Twój wynik: {_scoreCount}\n" +
                 $"Rozwiązanie testu zajęło Ci {TimerText.ToString()} czasu.");
+
+            CheckAnswers checkAnswers = new CheckAnswers();
+            checkAnswers.ShowDialog();
+            CloseAction();
         }
+
+        public List<List<string>> Answers
+        {
+            get { return _answersCheck; }
+        }
+
+        public Action CloseAction { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
