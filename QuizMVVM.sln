@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32414.318
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizMVVM", "QuizMVVM.csproj", "{E26EA8A6-43A0-4757-A249-78AE59FC1F61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizMVVM", "QuizMVVM.csproj", "{FA2B03F5-1C53-4BA3-8749-4AAB0CE2F2CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E26EA8A6-43A0-4757-A249-78AE59FC1F61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E26EA8A6-43A0-4757-A249-78AE59FC1F61}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E26EA8A6-43A0-4757-A249-78AE59FC1F61}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E26EA8A6-43A0-4757-A249-78AE59FC1F61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA2B03F5-1C53-4BA3-8749-4AAB0CE2F2CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA2B03F5-1C53-4BA3-8749-4AAB0CE2F2CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA2B03F5-1C53-4BA3-8749-4AAB0CE2F2CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA2B03F5-1C53-4BA3-8749-4AAB0CE2F2CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D37405CF-27AD-4943-9847-9E975514B34C}
+		SolutionGuid = {4591EB40-D724-4FD0-ABBE-B7CD31C960EC}
 	EndGlobalSection
 EndGlobal
