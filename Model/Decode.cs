@@ -14,7 +14,7 @@ namespace QuizMVVM.Model
         {
             string fileString = File.ReadAllText(fileName);
             string fileStringDecrypted = "";
-            for(int i = 0; i < fileString.Length; i++)
+            for (int i = 0; i < fileString.Length; i++)
             {
                 int charIndex = fileString[i];
                 fileStringDecrypted += Convert.ToChar(charIndex - n);

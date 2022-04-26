@@ -11,7 +11,7 @@ namespace QuizMVVM.Model
     {
         [System.Runtime.Serialization.DataMember(Name = "content")]
         public string? Content { get; set; }
-        [System.Runtime.Serialization.DataMember(Name="isCorrect")]
+        [System.Runtime.Serialization.DataMember(Name = "isCorrect")]
         public bool IsCorrect { get; set; }
     }
 }

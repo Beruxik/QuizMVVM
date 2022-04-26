@@ -41,25 +41,18 @@ namespace QuizMVVM.ViewModel
 
         private bool _isThisLastQuestion;
 
+        // Deserializacja danych
+        protected QuizClass? quizClass = (QuizClass)OpenFile.OpenJsonEncrypted();
+
         // Timer
         private DispatcherTimer _dispatcherTimer = new DispatcherTimer(DispatcherPriority.Render);
         private int _totalSeconds = 0;
         private string _timerText;
 
-        // Deserializacja danych
-        static JsonSerializerOptions options = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            WriteIndented = true
-        };
-
-        static string fileName = @"..\..\..\test.json";
-
-        protected QuizClass? quizClass = JsonSerializer.Deserialize<QuizClass>(Decode.Decoding(fileName, 3), options);
-
-
         public MainViewModel()
         {
+            if (quizClass == null)
+                CloseAction();
             Title = quizClass?.Title;
             for (int i = 0; i < quizClass?.Questions?.Count; i++)
                 _answers.Add(new List<string>());
@@ -90,10 +83,10 @@ namespace QuizMVVM.ViewModel
             _dispatcherTimer.Start();
         }
 
-        public string Title 
-        { 
-            get { return this._title; } 
-            set { this._title = value; OnPropertyChanged(); } 
+        public string Title
+        {
+            get { return this._title; }
+            set { this._title = value; OnPropertyChanged(); }
         }
 
         // Timer
